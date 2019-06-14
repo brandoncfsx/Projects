@@ -30,7 +30,7 @@ cv2.imshow('Image', image)
 # waitKey to pause execution of script until we press a key.
 cv2.waitKey(0)
 # Or we can use matplotlib.
-# Need to reverse RGB to BGR for matplotlib. Note: .png images are RGB.
+# Need to reverse BGR to RGB for matplotlib. Note: images stored in opencv2 is in BGR.
 # Note: imshow method for matplotlib does not work for displaying frames of a video stream or video file.
 plt.imshow(image[:,:,::-1])
 plt.axis('off')
