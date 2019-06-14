@@ -64,3 +64,16 @@ for n in range(0, 25):
 
 cv2.imshow('Canvas', canvas)
 cv2.waitKey(0)
+
+canvas = np.zeros((300, 300, 3), dtype='uint8')
+# To draw every other square, skip two times the width.
+increment = canvas.shape[0] // 30
+# Since range's third arg is step size, divide the width of the image by the number of squares we want.
+step_size = canvas.shape[0] // 15
+for col in range(0, canvas.shape[1], step_size):
+    for row in range(0, canvas.shape[0], step_size):
+        cv2.rectangle(canvas, (col, row+increment), (col+increment-1, row+2*increment-1), red, -1)
+        cv2.rectangle(canvas, (col+increment, row), (col+2*increment-1, row+increment-1), red, -1)
+cv2.circle(canvas, (canvas.shape[1] // 2, canvas.shape[0] // 2), 50, green, -1)
+cv2.imshow('Canvas', canvas)
+cv2.waitKey(0)
