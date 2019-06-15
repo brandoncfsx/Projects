@@ -27,3 +27,7 @@ dim = (int(image.shape[1] * r), 50)
 resized = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
 cv2.imshow('Resized (Height)', resized)
 cv2.waitKey(0)
+
+resized = imutils.resize(image, width=400)
+cv2.imshow('Resized (Width)', resized)
+cv2.waitKey(0)
