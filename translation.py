@@ -23,7 +23,6 @@ cv2.imshow('Shifted down and right', shifted)
 cv2.waitKey(0)
 
 # Can see that it takes quite a bit of code to translate an image, instead we will create a helper method in imutils.py.
-M = np.float32([[1, 0, -50], [0, 1, -90]])
-shifted = cv2.warpAffine(image, M, (image.shape[1], image.shape[0]))
+shifted = imutils.translate(image, -50, -90)
 cv2.imshow('Shifted up and left', shifted)
 cv2.waitKey(0)
