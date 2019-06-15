@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "437ba09e979ea411a181232cf8c9e7771e3b25acf03a174645f43db57bfe18af"
+            "sha256": "55168fbd8a70ebfd64567f51639d45c728787d20b3535c69e4127d5cde8e1a6d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -36,6 +36,13 @@
                 "sha256:42e65aadfc3d57a1043615c92bdf6319b67589e49a0aae2b985b82144aceacad"
             ],
             "version": "==2.5.0"
+        },
+        "imutils": {
+            "hashes": [
+                "sha256:1d2bdf373e3e6cfbdc113d4e91547d3add3774d8722c8d4f225fa39586fb8076"
+            ],
+            "index": "pypi",
+            "version": "==0.5.2"
         },
         "joblib": {
             "hashes": [
@@ -76,13 +83,6 @@
                 "sha256:f790f8b3dff3d53453de6a7b7ddd173d2e020fb160baff578d578065b108a05f"
             ],
             "version": "==1.1.0"
-        },
-        "mahotas": {
-            "hashes": [
-                "sha256:cf7e661add06fb446a257fdecfb24e103e36b4e69a675c188e042921a0ff75ab"
-            ],
-            "index": "pypi",
-            "version": "==1.4.5"
         },
         "matplotlib": {
             "hashes": [
