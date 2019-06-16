@@ -12,3 +12,6 @@ cv2.waitKey(0)
 
 print(f'Max of 255: {cv2.add(np.uint8([200]), np.uint8([100]))}.')
 print(f'Min of 0: {cv2.subtract(np.uint8([50]), np.uint8([100]))}.')
+
+print(f'Wrap around: {np.uint8([200]) + np.uint8([100])}.')
+print(f'Wrap around: {np.uint8([50]) - np.uint8([100])}')
