@@ -1,3 +1,2 @@
-# Projects
-For fun
-Hello.
+# Computer Vision
+OpenCV
