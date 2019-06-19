@@ -33,3 +33,12 @@ cv2.imshow('Original', image)
 plot_histogram(image, 'Histogram for Original Image')
 cv2.waitKey(0)
 plt.show()
+
+mask = np.zeros(image.shape[:2], dtype='uint8')
+cv2.rectangle(mask, (10, 35), (40, 70), 255, -1)
+cv2.imshow('Mask', mask)
+cv2.waitKey(0)
+
+masked = cv2.bitwise_and(image, image, mask=mask)
+cv2.imshow('Applying the Mask', masked)
+cv2.waitKey(0)
