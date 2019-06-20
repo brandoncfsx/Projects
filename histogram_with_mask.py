@@ -42,3 +42,6 @@ cv2.waitKey(0)
 masked = cv2.bitwise_and(image, image, mask=mask)
 cv2.imshow('Applying the Mask', masked)
 cv2.waitKey(0)
+
+plot_histogram(image, 'Histogram for Masked Image', mask=mask)
+plt.show()
