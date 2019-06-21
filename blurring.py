@@ -29,3 +29,11 @@ blurred = np.hstack([
 
 cv2.imshow('Gaussian', blurred)
 cv2.waitKey(0)
+
+blurred = np.hstack([
+    cv2.medianBlur(image, 3),
+    cv2.medianBlur(image, 5),
+    cv2.medianBlur(image, 7)])
+
+cv2.imshow('Median', blurred)
+cv2.waitKey(0)
