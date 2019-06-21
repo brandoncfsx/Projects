@@ -30,10 +30,21 @@ blurred = np.hstack([
 cv2.imshow('Gaussian', blurred)
 cv2.waitKey(0)
 
+# Median Blurring.
 blurred = np.hstack([
     cv2.medianBlur(image, 3),
     cv2.medianBlur(image, 5),
     cv2.medianBlur(image, 7)])
 
 cv2.imshow('Median', blurred)
+cv2.waitKey(0)
+
+# Bilateral Blurring.
+# Args: image, diameter of pixel neighborhood, color sigma (a larger value for color sigma means that more colors in the neighborhood will be considered when computing the blur), space sigma (a larger value for this means that pixels farther out from the central pixel will influence the blurring calculation, provided that their colors are similar enough).
+blurred = np.hstack([
+    cv2.bilateralFilter(image, 5, 21, 21),
+    cv2.bilateralFilter(image, 7, 31, 31),
+    cv2.bilateralFilter(image, 9, 41, 41)])
+
+cv2.imshow('Bilateral', blurred)
 cv2.waitKey(0)
