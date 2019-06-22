@@ -30,7 +30,7 @@ cv2.waitKey(0)
 # THRESH_TOZERO: sets the source pixel to zero if the source pixel is not greater than the supplied threshold.
 
 otherMethods = [
-    ('THRESH,TRUNC', cv2.THRESH_TRUNC),
+    ('THRESH_TRUNC', cv2.THRESH_TRUNC),
     ('THRESH_TOZERO', cv2.THRESH_TOZERO),
     ('THRESH_TOZERO_INV', cv2.THRESH_TOZERO_INV)]
 
