@@ -20,5 +20,6 @@ cv2.imshow('Threshold Binary', threshold)
 (T, thresholdInv) = cv2.threshold(blurred, 155, 255, cv2.THRESH_BINARY_INV)
 cv2.imshow('Inverse Threshold Binary', thresholdInv)
 
+# We reveal the objects in the image and hide everything else by masking the image with the inverted threshold image. This is because a mask only considers pixels in the original image where the mask is greater than zero. Since the inverted thresholded image can approximate the areas the objects are contained, we can use this inverted thresholded image as our mask.
 cv2.imshow('Coins', cv2.bitwise_and(image, image, mask=thresholdInv))
 cv2.waitKey(0)
