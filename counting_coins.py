@@ -27,3 +27,23 @@ coins = image.copy()
 cv2.drawContours(coins, cnts, -1, (0, 255, 0), 2)
 cv2.imshow('Coins', coins)
 cv2.waitKey(0)
+
+# Crop each individual coin.
+for (i, c) in enumerate(cnts):
+    # Create a box that encloses the contour.
+    # This function takes in the contour and returns the x and y position that the rectangle starts at, and its width and height.
+    (x, y, w, h) = cv2.boundingRect(c)
+
+    print(f'Coin #{i+1}')
+    # Display image of the box enclosure of the contour.
+    coin = image[y : y+h, x : x+w]
+    cv2.imshow('Coin', coin)
+
+    mask = np.zeros(image.shape[:2], dtype='uint8')
+    # This function fits a circle to our contour - returns x and y coordinate of the center of the circle and its radius.
+    ((centerX, centerY), radius) = cv2.minEnclosingCircle(c)
+    # Draw a circle that will mask our image of the box enclosure so that we only see the coin itself.
+    cv2.circle(mask, (int(centerX), int(centerY)), int(radius), 255, -1)
+    mask = mask[y : y+h, x : x+w]
+    cv2.imshow('Masked Coin', cv2.bitwise_and(coin, coin, mask=mask))
+    cv2.waitKey(0)
