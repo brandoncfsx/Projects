@@ -41,6 +41,7 @@ while True:
             # Two contour properties. Area of the bounding box = number of non-zero pixels inside the bounding box divided by  the total number of pixels in it.
             area = cv2.contourArea(c)
             hullArea = cv2.contourArea(cv2.convexHull(c))
+            # Solidity quantifies the amount and size of concavities in an object boundary.
             solidity = area / hullArea
 
             # Compute if the width and height, solidity and aspect ratio of the contour falls within appropriate bounds.
