@@ -50,3 +50,18 @@ cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
 cv2.imshow('Outline', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# Step 3: Apply a Perspective Transform and Threshold
+# Apply four point transformation. Second arg is the contour of the document multiplied by the resize ratio. We do this because we performed edge detection and found contours on the resized image of height of 500 pixels.
+warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
+
+# Produce black and white paper effect via grayscale conversion and thresholding.
+warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+# Adaptive thresholding.
+warped = cv2.adaptiveThreshold(warped, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 7)
+warped = warped.astype('uint8')
+
+print(f'STEP 3: Apply Perspective Transform')
+cv2.imshow('Original', imutils.resize(orig, height=650))
+cv2.imshow('Scanned', imutils.resize(warped, height=650))
+cv2.waitKey(0)
