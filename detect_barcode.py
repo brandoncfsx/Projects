@@ -20,3 +20,24 @@ gradient = cv2.convertScaleAbs(gradient)
 
 cv2.imshow('Gradient', gradient)
 cv2.waitKey(0)
+
+# Next, filter out the noise and extrat ROI.
+# Average blur/
+blurred = cv2.blur(gradient, (9, 9))
+(_, thresh) = cv2.threshold(blurred, 225, 255, cv2.THRESH_BINARY)
+
+cv2.imshow('Thresholded', thresh)
+cv2.waitKey(0)
+
+# In order to close the gaps in the barcode region in the thresholded image, we need to perform morphological operations. Create rectangular kernel with a width that is larger than the height which allows us to close the gaps between vertical stripes.
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (21, 7))
+closed = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
+
+cv2.imshow('Closing', closed)
+cv2.waitKey(0)
+
+# Next, we need to remove random small blobs in the image that are not part of the barcode region by a series of erosions and dilations. Erosions remove the white blobs while dilation will grow the white regions outwards.
+closed = cv2.erode(closed, None, iterations=4)
+closed = cv2.dilate(closed, None, iterations=4)
+cv2.imshow('Erosion and Dilation', closed)
+cv2.waitKey(0)
