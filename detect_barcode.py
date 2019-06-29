@@ -3,6 +3,8 @@ import argparse
 import imutils
 import cv2
 
+# Only works for horizontal barcodes.
+
 ap = argparse.ArgumentParser()
 ap.add_argument('-i', '--image', required=True, help='Path to the image.')
 args = vars(ap.parse_args())
@@ -21,7 +23,7 @@ gradient = cv2.convertScaleAbs(gradient)
 cv2.imshow('Gradient', gradient)
 cv2.waitKey(0)
 
-# Next, filter out the noise and extrat ROI.
+# Next, filter out the noise and extract ROI.
 # Average blur/
 blurred = cv2.blur(gradient, (9, 9))
 (_, thresh) = cv2.threshold(blurred, 225, 255, cv2.THRESH_BINARY)
@@ -40,4 +42,19 @@ cv2.waitKey(0)
 closed = cv2.erode(closed, None, iterations=4)
 closed = cv2.dilate(closed, None, iterations=4)
 cv2.imshow('Erosion and Dilation', closed)
+cv2.waitKey(0)
+
+# Next, find contours of the barcode region.
+(cnts, hierarchy) = cv2.findContours(closed.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+# Only keep the largest contour.
+c = sorted(cnts, key=cv2.contourArea, reverse=True)[0]
+
+# Compute the rotated bounding box of the largest contour.
+rect = cv2.minAreaRect(c)
+box = cv2.boxPoints(rect)
+box = np.int0(box)
+
+# Draw a bounding box around the barcode.
+cv2.drawContours(image, [box], -1, (0, 255, 0), 3)
+cv2.imshow('Image', image)
 cv2.waitKey(0)
