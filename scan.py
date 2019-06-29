@@ -29,3 +29,24 @@ cv2.imshow('Image', image)
 cv2.imshow('Edged', edged)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# Step 2: Finding Contours
+# We will assume that the largest contour with exactly four points is our piece of paper to be scanned.
+(cnts, hierarchy) = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:5]
+
+for c in cnts:
+    # Approximate the contour
+    peri = cv2.arcLength(c, True)
+    approx = cv2.approxPolyDP(c, 0.02*peri, True)
+
+    # If approximated contour has four points, then we found it.
+    if len(approx) == 4:
+        screenCnt = approx
+        break
+
+print(f'STEP 2: Find contours of paper')
+cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+cv2.imshow('Outline', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
