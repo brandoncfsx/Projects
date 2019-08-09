@@ -16,7 +16,10 @@ net = cv2.dnn.readNetFromCaffe(args['prototxt'], args['model'])
 # Load input image and create an input blob for it by resizing to a fixed size and then normalize it.
 image = cv2.imread(args['image'])
 (h, w) = image.shape[:2]
-if h > 500 and w > 500:
+if h > 900 or w > 900:
+    image = cv2.resize(image, (int(w * 0.2), int(h * 0.2)))
+    (h, w) = image.shape[:2]
+elif h > 500 and w > 500:
     image = cv2.resize(image, (int(w * 0.8), int(h * 0.8)))
     (h, w) = image.shape[:2]
 # Preprocess image - sets blob dimensions and normalization.
